@@ -1,0 +1,35 @@
+name: helloworld-image-build
+
+on:
+  release:
+    types: [published]
+
+# Jobs
+jobs:
+  # Build and push container image with release tag
+  push_to_registry:
+    name: Push Docker image to Docker Hub using release tag
+    runs-on: ubuntu-latest
+
+    steps:
+
+      - name: Check out the repo
+        uses: actions/checkout@v2
+
+      - name: Push release tag to Docker Hub
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          path: ./app/helloworld/
+          repository: jmsearcy/helloworld
+          tag_with_ref: true
+
+      - name: Push latest tag to Docker Hub
+        uses: docker/build-push-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          path: ./app/helloworld/
+          repository: jmsearcy/helloworld
+          tag: latest
