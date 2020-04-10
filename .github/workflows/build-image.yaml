@@ -32,4 +32,4 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
           path: ./app/helloworld/
           repository: jmsearcy/helloworld
-          tag: latest
+          tags: latest
