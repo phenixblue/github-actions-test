@@ -1,0 +1,35 @@
+name: helloworld-ci
+
+on: [pull_request]
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        export PIPENV_PIPFILE="app/helloworld/Pipfile"
+        pip install pipenv
+        pipenv install --system --deploy
+
+    - name: Lint with Black
+      run: |
+        pip install black
+        make ci-lint
+        
+    - name: Test with unittest
+      run: |
+        make test
