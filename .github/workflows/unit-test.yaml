@@ -3,7 +3,7 @@ name: helloworld-ci
 on: [pull_request]
 
 jobs:
-  test:
+  unit-test:
 
     runs-on: ubuntu-latest
     strategy:
