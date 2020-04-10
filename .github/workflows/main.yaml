@@ -1,10 +1,14 @@
 name: helloworld-ci
 
+env:
+      PIPENV_PIPFILE: "app/helloworld/Pipfile"
+
 on: [pull_request]
 
+# Jobs
 jobs:
-  test:
-
+  # Job to lint code
+  lint:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -21,14 +25,32 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        export PIPENV_PIPFILE="app/helloworld/Pipfile"
-        pip install pipenv
-        pipenv install --system --deploy
 
     - name: Lint with Black
       run: |
         pip install black
         make ci-lint
+  # Job to execute unit tests
+  unit-test:
+    needs: lint
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.7]
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pipenv
+        pipenv install --system --deploy
 
     - name: Test with unittest
       run: |
