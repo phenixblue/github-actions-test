@@ -2,7 +2,7 @@ name: helloworld-image-build
 
 on:
   release:
-    types: [published]
+    types: [created]
 
 # Jobs
 jobs:
