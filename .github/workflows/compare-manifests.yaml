@@ -1,0 +1,19 @@
+name: ci-manifest-checks
+
+on: 
+  pull_request:
+    paths:
+      - 'deploy/**'
+
+# Jobs
+jobs:
+  # Job to check for manifest changes
+  compare-manifests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Check for manifest changes
+      run: |
+        make compare-install-manifest
