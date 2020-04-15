@@ -8,7 +8,7 @@ on:
 # Jobs
 jobs:
   # Job to check for manifest changes
-  lint:
+  compare-manifests:
     runs-on: ubuntu-latest
 
     steps:
