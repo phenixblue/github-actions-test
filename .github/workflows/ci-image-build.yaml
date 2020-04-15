@@ -7,7 +7,7 @@ on:
 # Jobs
 jobs:
   # Build and push container image with release tag
-  puhs-to-registry:
+  push-to-registry:
     name: Push Docker image to Docker Hub using release tag
     runs-on: ubuntu-latest
 
