@@ -1,4 +1,4 @@
-name: helloworld-image-build
+name: ci-image-build
 
 on:
   release:

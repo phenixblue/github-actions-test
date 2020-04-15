@@ -1,4 +1,4 @@
-name: helloworld-ci
+name: ci-manifest-checks
 
 on: 
   pull_request:

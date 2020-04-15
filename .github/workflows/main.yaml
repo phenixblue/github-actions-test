@@ -1,4 +1,4 @@
-name: helloworld-ci
+name: ci-python-checks
 
 env:
       PIPENV_PIPFILE: "app/helloworld/Pipfile"
