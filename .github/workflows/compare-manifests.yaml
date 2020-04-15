@@ -2,8 +2,11 @@ name: ci-manifest-checks
 
 on: 
   pull_request:
-    paths:
-      - 'deploy/**'
+    # Commenting out paths for now until GH Actions
+    # Have good suport for required checks + path filters
+    # https://github.community/t5/GitHub-Actions/Feature-request-conditional-required-checks/m-p/36938#M2735
+    #paths:
+    #  - 'deploy/**'
 
 # Jobs
 jobs:
